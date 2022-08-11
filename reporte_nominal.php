@@ -198,8 +198,8 @@ $query="SELECT
 
 $consulta=pg_query($dbconect,$query) or die('Fallo consulta');
 #$query = db->consulta("SELECT * from adm.personal limit 10");
-header("Content-Type: application/vnd.ms-excel");
-header("Content-Disposition: attachment; filename=\"$filename\"");
+#header("Content-Type: application/vnd.ms-excel");
+header("Content-Type: application/vnd.ms-excel;Content-Disposition: attachment; filename=\"$filename\"");
 $flag=false;
 
 while(false !== ($row = pg_fetch_assoc($consulta))) {
