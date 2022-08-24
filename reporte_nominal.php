@@ -12,7 +12,7 @@ $filename = "base_nominal_" .date('Y-m-d').".xls";
 
 #$fecha_desde
 #$fecha_hasta
-
+/*
 $query="SELECT
         n.fechaingreso,
         n.ultimacita  ,
@@ -194,8 +194,10 @@ $query="SELECT
         FROM nominales.nefroproteccion as n
         LEFT JOIN reporte.informe_parametro_temporal ipt on TRUE
         WHERE 
-        n.ultimacita BETWEEN ipt.fecha_desde::DATE AND ipt.fecha_hasta::DATE";
+        n.ultimacita BETWEEN ipt.fecha_desde::DATE AND ipt.fecha_hasta::DATE limit 10";
+*/
 
+$query = ("SELECT * from adm.personal limit 10");
 $consulta=pg_query($dbconect,$query) or die('Fallo consulta');
 #$query = db->consulta("SELECT * from adm.personal limit 10");
 #header("Content-Type: application/vnd.ms-excel");
