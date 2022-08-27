@@ -184,9 +184,9 @@ $PSQL "\COPY ( SELECT
         n.correo_paciente  ,
         n.novedades_notas ,
         n.progresion_erc
-        FROM nominales.nefroproteccion as n
+        FROM nominales.nefroproteccion n
         LEFT JOIN reporte.informe_parametro_temporal ipt on TRUE
         WHERE 
-        n.ultimacita BETWEEN ipt.fecha_desde::DATE AND ipt.fecha_hasta::DATE
+        n.ultimacita::DATE BETWEEN ipt.fecha_desde::DATE AND ipt.fecha_hasta::DATE
         ORDER BY n.ultimacita desc 
         LIMIT 10) TO '/opt/tomcat_carlosg/php_nefro/nominal/Nominal_Nefroproteccion.csv' WITH CSV HEADER;"

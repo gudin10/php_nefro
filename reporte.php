@@ -1,5 +1,5 @@
 <?php
-$sh = 'sh /home/cristal/ReportesSh/NefroproteccionBN.sh';
+$sh = 'sh /opt/tomcat_carlosg/php_nefro/Nefroproteccion.sh';
 
 $exec = shell_exec($sh);                                
 
@@ -7,7 +7,8 @@ $salida = $exec;
 
 if ($salida != null)
 {                        
-    header('Location: https://cristalweb.emssanar.org.co:8002/nominales/Nominal_Nefroproteccion.csv');
+    #header('Location: https://cristalweb.emssanar.org.co:8002/nominales/Nominal_Nefroproteccion.csv');
+    header('Location: /opt/tomcat_carlosg/php_nefro/nominal/Nominal_Nefroproteccion.csv');
 }
 else{        
     echo "ERROR AL GENERAR EL ARCHIVO";
