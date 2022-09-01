@@ -6,6 +6,9 @@ export PGPASSWORD="CRIS-PRO2021**"
 
 PSQL="psql -U postgres -h 192.168.125.77 -d clinica_produccion -x -c "
 
+MES_NUM=$(date +%m)
+ANIO_NUM=$(date +%Y)
+
 $PSQL "\COPY ( SELECT
         n.fechaingreso,
         n.ultimacita  ,
@@ -185,8 +188,20 @@ $PSQL "\COPY ( SELECT
         n.novedades_notas ,
         n.progresion_erc
         FROM nominales.nefroproteccion n
-        LEFT JOIN reporte.informe_parametro_temporal ipt on TRUE
+        LEFT JOIN nominales.fecha_parametro ipt on TRUE
         WHERE 
-        n.ultimacita::DATE BETWEEN ipt.fecha_desde::DATE AND ipt.fecha_hasta::DATE
+        n.ultimacita::DATE BETWEEN ipt.fecha_inicio::DATE AND now()::DATE
         ORDER BY n.ultimacita desc 
-        LIMIT 10) TO '/opt/tomcat_carlosg/php_nefro/nominal/Nominal_Nefroproteccion.csv' WITH CSV HEADER;"
+        LIMIT 10) TO '/opt/tomcat_carlosg/php_nefro/nominal/nominales_nefroproteccion-${MES_NUM}-${ANIO_NUM}.csv' WITH CSV HEADER;"
+
+$PSQL "INSERT INTO nominales.reporte_nominales 
+	(	mes ,
+		ano ,
+		modificacion,
+                id_tipo_nominal)
+	VALUES (
+	(to_char(now(),'MM'))::integer,
+	to_char(now(),'YYYY')::integer,
+	now(),
+        'TES'
+	);"

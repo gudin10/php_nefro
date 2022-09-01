@@ -7,7 +7,7 @@ $salida = $exec;
 
 if ($salida != null)
 {                        
-    #header('Location: https://cristalweb.emssanar.org.co:8002/nominales/Nominal_Nefroproteccion.csv');
+    echo("Generando nominal ...");
     header('Location: /opt/tomcat_carlosg/php_nefro/nominal/Nominal_Nefroproteccion.csv');
 }
 else{        
@@ -15,6 +15,7 @@ else{
 }
 ?>
 
+<!--
 <!DOCTYPE html>
 <style type="text/css">
     .loader {
@@ -40,3 +41,4 @@ else{
     <body>
         <div class="loader"></div>
     </body>
+-->
