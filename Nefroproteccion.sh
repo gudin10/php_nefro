@@ -192,7 +192,7 @@ $PSQL "\COPY ( SELECT
         WHERE 
         n.ultimacita::DATE BETWEEN ipt.fecha_inicio::DATE AND now()::DATE
         ORDER BY n.ultimacita desc 
-        LIMIT 10) TO '/opt/tomcat_carlosg/php_nefro/nominal/nominales_nefroproteccion-${MES_NUM}-${ANIO_NUM}.csv' WITH CSV HEADER;"
+        ) TO '/home/cristal/exportacion_nominal_nefro/nominales/nominales_nefroproteccion-${MES_NUM}-${ANIO_NUM}.csv' WITH CSV HEADER;"
 
 $PSQL "INSERT INTO nominales.reporte_nominales 
 	(	mes ,
@@ -203,5 +203,9 @@ $PSQL "INSERT INTO nominales.reporte_nominales
 	(to_char(now(),'MM'))::integer,
 	to_char(now(),'YYYY')::integer,
 	now(),
-        'TES'
+        'NFR'
 	);"
+
+unoconv --format xls /home/cristal/exportacion_nominal_nefro/nominales/nominales_nefroproteccion-${MES_NUM}-${ANIO_NUM}.csv
+
+rm /home/cristal/exportacion_nominal_nefro/nominales/nominales_nefroproteccion-${MES_NUM}-${ANIO_NUM}.csv
